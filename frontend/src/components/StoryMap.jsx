@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import { X, MapPin as MapPinIcon } from 'lucide-react';
+import { X, Plus, MapPin as MapPinIcon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -18,7 +18,8 @@ const StoryMap = ({ stories, onMapInteraction }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const center = [-26.2041, 28.0473];
-
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
+  
   const handleInteraction = () => {
     if (onMapInteraction) onMapInteraction();
   };
@@ -44,6 +45,17 @@ const StoryMap = ({ stories, onMapInteraction }) => {
             : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           }
         />
+
+      <button
+        onClick={() => setShowLocationPicker(true)}
+        className={`
+          absolute bottom-24 right-4 z-[1000] p-3 rounded-full shadow-lg transition hover:scale-105
+          bg-neon-500 text-white hover:bg-neon-600
+        `}
+      >
+        <Plus size={24} strokeWidth={2} />
+      </button>
+
         {stories.map((story) => (
           <Marker
             key={story.id}
