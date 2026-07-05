@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: izwi-lethu-backend
+    runtime: docker
+    repo: https://github.com/dondolo2/izwi-lethu
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_WHATSAPP_NUMBER
+        sync: false
+      - key: HUGGINGFACE_TOKEN
+        sync: false
